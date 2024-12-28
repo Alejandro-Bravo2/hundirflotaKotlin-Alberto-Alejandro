@@ -1,7 +1,6 @@
 package org.alejandro.kotlin
 import java.io.File
-import kotlinx.serialization.Serializable
-import kotlinx.serialization.json.Json
+
 /**
  * Clase para guardar el directorio y trabajar con el
  * @param rutaDirectorio Es la ruta absoluta del directorio al que se va a comprobar si existe o no
