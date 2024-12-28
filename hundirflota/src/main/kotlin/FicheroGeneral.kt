@@ -35,7 +35,7 @@ class FicheroGeneral(val nombreFichero:String) {
     /** Este metodo sirve para leer el contenido del fichero general
      * @return: Devuelve el diccionario que contiene el fichero general
      */
-    fun leerFichero(): Map<String, Any> {
+    fun leerFichero(): MutableMap<String, Any> {
         val fichero = File(this.nombreFichero)
         val jsonString = fichero.readText() // leemos el contenido del fichero
         val gson = Gson() // Gson sirve para serializar nuestro diccionario a un tipo de dato que pueda manejar Json
