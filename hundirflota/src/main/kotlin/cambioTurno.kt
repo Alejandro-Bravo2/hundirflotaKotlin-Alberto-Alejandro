@@ -6,7 +6,7 @@ package org.alejandro.kotlin
  * HA SIDO CAMBIADO, SI NO QUE LO CAMBIA Y .
  */
 fun cambioTurno(){
-    val diccionarioGeneral = FicheroGeneral("general.json")
+    val diccionarioGeneral = FicheroGeneral()
     var diccionarioConfiguracionGeneral : MutableMap<String, Any> = diccionarioGeneral.leerFichero()
     if (diccionarioConfiguracionGeneral["turno_actual"] == "j1"){
         diccionarioConfiguracionGeneral["turno_actual"] = "j2"

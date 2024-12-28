@@ -9,9 +9,10 @@ package org.alejandro.kotlin
  * PERO ESTO LO HACE DENTRO DE LA FUNCIÓN POR LO QUE NO
  * HAY QUE PREOCUPARSE,
  *
- * @param tiempoEspera: el diccionario de configuración general
  */
-fun tiempoEspera(diccionarioConfig: MutableMap<String, Any>){
+fun tiempoEspera(){
+    val diccionarioGeneral = FicheroGeneral()
+    val diccionarioConfig : MutableMap<String, Any> = diccionarioGeneral.leerFichero()
     Thread.sleep(((diccionarioConfig["tiempo_refresco"] as Int).toLong())*1000)
 }
 
@@ -20,9 +21,10 @@ fun tiempoEspera(diccionarioConfig: MutableMap<String, Any>){
  * pero el de turnos, este tiempo es el que tenemos guardado
  * como tiempo_ataque y es de 30 segundos
  *
- * @param tiempoEspera: el diccionario de configuración general
  *
  */
-fun tiempoEsperaTurno(diccionarioConfig: MutableMap<String, Any>){
+fun tiempoEsperaTurno(){
+    val diccionarioGeneral = FicheroGeneral()
+    val diccionarioConfig : MutableMap<String, Any> = diccionarioGeneral.leerFichero()
     Thread.sleep(((diccionarioConfig["tiempo_ataque"] as Int).toLong())*1000)
 }

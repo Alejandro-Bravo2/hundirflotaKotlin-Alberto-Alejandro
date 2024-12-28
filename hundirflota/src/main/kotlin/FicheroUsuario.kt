@@ -60,7 +60,7 @@ class FicheroUsuario(val nombreFichero: String) {
         */
         return gson.fromJson(jsonString, formato)
         // Devuelve el contenido del fichero usando el tipo que le indicamos con formato
-
+        // posiblemente el return lo deba cambiar para que no devuelva double pero vamos a probar primero.
     }
 
     /** Este metodo sirve para actualizar el contenido del diccionario
@@ -73,11 +73,4 @@ class FicheroUsuario(val nombreFichero: String) {
         val fichero = File(this.nombreFichero)
         fichero.writeText(jsonString)
     }
-}
-
-fun main(){
-    val ficheroUsuario = FicheroUsuario("usuario.json")
-    ficheroUsuario.crearFichero()
-    var diccionario = ficheroUsuario.leerFichero()
-    println(diccionario)
 }
