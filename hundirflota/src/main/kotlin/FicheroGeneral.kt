@@ -71,6 +71,22 @@ class FicheroGeneral() {
         val fichero = File(this.nombreFichero)
         fichero.writeText(jsonString)
     }
+
+    /**
+     * Esta función revisará si el turno ha cambiado al otro jugdor,
+     * en caso de que si haya cambiado devolvera True y en caso
+     * de que no haya cambiado devolverá False
+     * @param jugador: Jugador es un string que será j1 o j2,
+     * pero este jugador es el que esta en esta terminal,
+     */
+    fun revisarCambioTurno(jugador:String) : Boolean {
+        val diccionarioConfig : MutableMap<String, Any> = this.leerFichero()
+        if (diccionarioConfig["turno_actual"].toString() == jugador) {
+            return true
+        } else {
+            return false
+        }
+    }
 }
 
 /*
