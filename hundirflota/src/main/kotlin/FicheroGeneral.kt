@@ -12,7 +12,7 @@ class FicheroGeneral(val nombreFichero:String) {
      *
      */
     fun crearFichero() {
-        val diccionarioConfig = mapOf<String, Any>(
+        val diccionarioConfig = mutableMapOf<String, Any>(
             "nombre_partida" to "Alejandro",
             "dimensiones_tablero" to 5,
             "tiempo_refresco" to 2,
