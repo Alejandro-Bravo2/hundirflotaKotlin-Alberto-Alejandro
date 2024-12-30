@@ -1,0 +1,1 @@
+{"nombre_partida":"j1","dimensiones_tablero":5,"tiempo_refresco":2,"tiempo_ataque":30,"configuracion_barcos":{"Portaaviones":{"tamaño":5.0,"numero":1.0},"Submarino":{"tamaño":2.0,"numero":2.0},"Destructor":{"tamaño":1.0,"numero":3.0}},"turnos_jugados":0,"turno_actual":"j1"}

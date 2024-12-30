@@ -2,6 +2,7 @@ package org.alejandro.kotlin
 import java.io.File
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import org.jetbrains.annotations.ApiStatus.NonExtendable
 
 /** Clase para manejar el fichero general
  */
@@ -12,7 +13,7 @@ class FicheroGeneral() {
     val nombreFichero:String = "general.json"
     fun crearFichero() {
         val diccionarioConfig = mutableMapOf<String, Any>(
-            "nombre_partida" to "Alejandro",
+            "nombre_partida" to "None",
             "dimensiones_tablero" to 5,
             "tiempo_refresco" to 2,
             "tiempo_ataque" to 30,
@@ -85,6 +86,51 @@ class FicheroGeneral() {
             return true
         } else {
             return false
+        }
+    }
+
+    /**
+     * Este metodo se encargará de verificar si el fichero general
+     * esta creado o no
+     * @return: Devolverá true en caso de que si esté creado o false en caso de que no esté creado.
+     */
+    fun comprobarExistencia() : Boolean {
+        if (File(this.nombreFichero).exists()){
+            return true
+        } else {
+            return false
+        }
+    }
+
+    /**
+     * Metodo encargado de revisar que jugadores están esperando
+     * @return: Devuelve el nombre del jugador que serían o j1 o j2. En caso de que ya
+     * existiese una partida devolvería None
+     */
+    fun revisarJugadores(): String{
+        val diccionario = leerFichero()
+        if(diccionario["nombre_partida"].toString() == "None"){
+            return "j1"
+        } else if (diccionario["nombre_partida"].toString() == "j1"){
+            return "j2"
+        } else{ // Esto simplemente lo he puesto porque el compilador necesita ver que siempre se devolverá algo
+            return "None"
+        }
+    }
+
+    /**
+     * Metodo encargado de agregar el nombre del actual jugador al
+     * nombre Partida del diccionario, en caso que exista por ejemplo
+     * j1 pues agregará j2
+     */
+    fun agregarJugadorAPartida(){
+        var diccionario = leerFichero()
+        if (diccionario["nombre_partida"].toString() == "None") {
+            diccionario["nombre_partida"] = "j1"
+            escribirFichero(diccionario)
+        } else if (diccionario["nombre_partida"].toString() == "j1") {
+            diccionario["nombre_partida"] = "j1 vs j2"
+            escribirFichero(diccionario)
         }
     }
 }
@@ -174,3 +220,5 @@ fun main(){
     ficheroGeneral.crearFichero()
 }
  */
+
+
