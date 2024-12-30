@@ -11,30 +11,33 @@ class FicheroUsuario(val nombreJugador: String) {
      *
      */
     fun crearFichero() {
-        val configuracionUsuario = mutableMapOf<String,Any>("nombre" to nombreJugador, "tablero" to mutableListOf<List<String>>(), "barco" to mutableMapOf<String, Any>(
+        val configuracionUsuario = mutableMapOf<String,Any>("nombre" to nombreJugador, "tablero" to mutableListOf<MutableList<String>>(
+            mutableListOf("B", "~", "B", "~", "B"), mutableListOf("B", "B", "B", "B", "B"), mutableListOf("~", "~", "~", "~", "~"),
+            mutableListOf("B", "~", "B", "B", "~"), mutableListOf("B", "~", "~", "~", "~")
+        ), "barco" to mutableMapOf<String, Any>(
             "portaaviones1" to mutableMapOf(
-                "coordenadas" to mutableListOf<Any>(mutableListOf<List<String>>()),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(1,0), mutableListOf(1,1), mutableListOf(1,2), mutableListOf(1,3), mutableListOf(1,4)),
+                "estado" to mutableMapOf<String, String>("[1, 0]" to "B", "[1, 1]" to "B", "[1, 2]" to "B", "[1, 3]" to "B", "[1, 4]" to "B")
             ),
             "submarino1" to mutableMapOf<String, Any>(
-                "coordenadas" to mutableListOf<Any>(),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(3,0), mutableListOf(4,0)),
+                "estado" to mutableMapOf<String, String>("[3,0]" to "B", "[4,0]" to "B"),
             ),
             "submarino2" to mutableMapOf<String, Any>(
-                "coordenadas" to mutableListOf<Any>(),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(3,2), mutableListOf(3,3)),
+                "estado" to mutableMapOf<String, String>("[3,2]" to "B", "[3,3]" to "B")
             ),
             "destructor1" to mutableMapOf<String, Any>(
-                "coordenadas" to mutableListOf<Any>(),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,2)),
+                "estado" to mutableMapOf<String, String>("[0,2]" to "B")
             ),
             "destructor2" to mutableMapOf<String, Any>(
-                "coordenadas" to mutableListOf<Any>(),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,0)),
+                "estado" to mutableMapOf<String, String>("[0,0]" to "B")
             ),
             "destructor3" to mutableMapOf<String, Any>(
-                "coordenadas" to mutableListOf<Any>(),
-                "estado" to mutableMapOf<String, String>()
+                "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,4)),
+                "estado" to mutableMapOf<String, String>("[0,4]" to "B")
             ),
             "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>())))
 
@@ -74,6 +77,18 @@ class FicheroUsuario(val nombreJugador: String) {
         val jsonString = gson.toJson(diccionario)
         val fichero = File(this.nombreFichero)
         fichero.writeText(jsonString)
+    }
+
+    /**
+     * Metodo encargo de verificar si el fichero del usuario existe o no
+     * @return: True en caso de que si exista y False en caso de que no exista
+     */
+    fun comprobarExistencia() : Boolean {
+        if (File(this.nombreFichero).exists()) {
+            return true
+        } else {
+            return false
+        }
     }
 }
 
