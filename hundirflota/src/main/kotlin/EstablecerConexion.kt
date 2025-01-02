@@ -20,6 +20,7 @@ fun establecerConexion(){
     if (!existenciaFicheroJugador){
         ficheroJugador.crearFichero()
     }
-    jugar(ficheroJugador, general)
+    tiempoEspera()
+    jugar(ficheroJugador, general, nombreJugador)
 
 }

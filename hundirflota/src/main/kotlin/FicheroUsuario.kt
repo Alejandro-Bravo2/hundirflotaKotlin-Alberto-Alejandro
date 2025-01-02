@@ -17,7 +17,7 @@ class FicheroUsuario(val nombreJugador: String) {
         ), "barco" to mutableMapOf<String, Any>(
             "portaaviones1" to mutableMapOf(
                 "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(1,0), mutableListOf(1,1), mutableListOf(1,2), mutableListOf(1,3), mutableListOf(1,4)),
-                "estado" to mutableMapOf<String, String>("[1, 0]" to "B", "[1, 1]" to "B", "[1, 2]" to "B", "[1, 3]" to "B", "[1, 4]" to "B")
+                "estado" to mutableMapOf<String, String>("[1,0]" to "B", "[1,1]" to "B", "[1,2]" to "B", "[1,3]" to "B", "[1,4]" to "B")
             ),
             "submarino1" to mutableMapOf<String, Any>(
                 "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(3,0), mutableListOf(4,0)),
@@ -38,8 +38,8 @@ class FicheroUsuario(val nombreJugador: String) {
             "destructor3" to mutableMapOf<String, Any>(
                 "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,4)),
                 "estado" to mutableMapOf<String, String>("[0,4]" to "B")
-            ),
-            "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>())))
+            )),
+            "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>()))
 
         val gson = Gson()
         val jsonString = gson.toJson(configuracionUsuario)
