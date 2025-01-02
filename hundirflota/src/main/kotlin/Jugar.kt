@@ -4,7 +4,10 @@ fun jugar(Fjugador: FicheroUsuario, Fgeneral : FicheroGeneral, nombreJugador: St
     val jugador2 = crearInstanciaOtroJugador(nombreJugador)
     var datosJugador2 = jugador2.leerFichero()
     var tableroAtaque : MutableMap<String,Any>
+    var datosJugador1 = Fjugador.leerFichero()
     var tableroReal : MutableList<MutableList<String>>
+    var tableroDefensor : MutableList<MutableList<String>>
+    var tableroDefensorDict : MutableMap<String,Any>
     var tableroAtaqueActualizado : MutableList<MutableList<String>>
     val ganador = false
     while(ganador == false){ //tengo que hacer una función que compruebe que todos los estados de los barcos esten vivos o no
@@ -17,11 +20,59 @@ fun jugar(Fjugador: FicheroUsuario, Fgeneral : FicheroGeneral, nombreJugador: St
             atacante(tableroReal,datosJugador2,Fjugador,jugador2,Fgeneral,nombreJugador)
 
         } else{
-            // crear funcion de posicion defensa
+            datosJugador1 = Fjugador.leerFichero().toMutableMap()
+            tableroDefensorDict = actualizarTablero(datosJugador1)
+            tableroDefensor  = datosJugador1["tablero"] as MutableList<MutableList<String>>
+            defensor(tableroDefensor, datosJugador1, Fjugador, jugador2, Fgeneral,nombreJugador)
         }
     }
 
 }
+
+fun defensor(tableroDefensorActualizado: MutableList<MutableList<String>>,tableroDefensor : MutableMap<String, Any>, Fjugador: FicheroUsuario, Fjugador2 : FicheroUsuario, Fgeneral: FicheroGeneral, nombreJugador: String){
+    var datosDiccionario = Fjugador.leerFichero()
+    var cambioJugador = false
+    var otroJugador : String
+    if (nombreJugador == "j1"){
+        otroJugador = "j2"
+    } else{
+        otroJugador = "j1"
+    }
+    while (cambioJugador == false ){
+        datosDiccionario = Fjugador.leerFichero()
+        println("Turno del jugador $otroJugador.")
+        println("Tablero de estado: ")
+        for (fila in tableroDefensorActualizado){
+            println(fila)
+        }
+        println("Esperando ataque...")
+        tiempoEspera()
+        cambioJugador = Fgeneral.revisarCambioTurno(nombreJugador)
+        limpiarPantalla()
+    }
+    println("Turno del jugador $otroJugador.")
+    println("Tablero de estado:")
+    var diccionarioSinOcultar = Fjugador.leerFichero().toMutableMap()
+    var diccionarioOculto = actualizarTablero(diccionarioSinOcultar)
+    var diccionarioOtroJugador = Fjugador2.leerFichero().toMutableMap()
+    for (fila in diccionarioSinOcultar){
+        println(fila)
+    }
+    var (ultimoAtaque : String, resultado : String) = encontrarUltimoMovimiento(diccionarioOtroJugador)
+    println("Ataque: $ultimoAtaque")
+    println("Resultado del ataque: $resultado")
+    tiempoEspera()
+    limpiarPantalla()
+}
+
+fun encontrarUltimoMovimiento(diccionarioJugador: MutableMap<String, Any>) : Pair<String,String>{
+    var coordenadas = diccionarioJugador["movimientos"] as MutableList<MutableList<Any>>
+    var ultima = coordenadas.last() as MutableMap<String, String>
+    var ultimaCoordenada = ultima["coordenadas"] as String
+    var resultado = ultima["resultado"] as String
+    return Pair(ultimaCoordenada,resultado)
+}
+
 
 fun actualizarTablero(diccionarioJugador2: MutableMap<String, Any>) : MutableMap<String, Any>{
     var tablero = diccionarioJugador2["tablero"] as MutableList<MutableList<String>>
@@ -36,38 +87,3 @@ fun actualizarTablero(diccionarioJugador2: MutableMap<String, Any>) : MutableMap
     return diccionarioJugador2
 }
 
-fun main(){
-    val configuracionUsuario = mutableMapOf<String,Any>("nombre" to "j1", "tablero" to mutableListOf<MutableList<String>>(
-        mutableListOf("B", "~", "B", "~", "B"), mutableListOf("B", "T", "H", "H", "B"), mutableListOf("~", "~", "~", "~", "~"),
-        mutableListOf("B", "~", "B", "B", "~"), mutableListOf("B", "~", "~", "~", "~")
-    ), "barco" to mutableMapOf<String, Any>(
-        "portaaviones1" to mutableMapOf(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(1,0), mutableListOf(1,1), mutableListOf(1,2), mutableListOf(1,3), mutableListOf(1,4)),
-            "estado" to mutableMapOf<String, String>("[1, 0]" to "B", "[1, 1]" to "B", "[1, 2]" to "B", "[1, 3]" to "B", "[1, 4]" to "B")
-        ),
-        "submarino1" to mutableMapOf<String, Any>(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(3,0), mutableListOf(4,0)),
-            "estado" to mutableMapOf<String, String>("[3,0]" to "B", "[4,0]" to "B"),
-        ),
-        "submarino2" to mutableMapOf<String, Any>(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf(3,2), mutableListOf(3,3)),
-            "estado" to mutableMapOf<String, String>("[3,2]" to "B", "[3,3]" to "B")
-        ),
-        "destructor1" to mutableMapOf<String, Any>(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,2)),
-            "estado" to mutableMapOf<String, String>("[0,2]" to "B")
-        ),
-        "destructor2" to mutableMapOf<String, Any>(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,0)),
-            "estado" to mutableMapOf<String, String>("[0,0]" to "B")
-        ),
-        "destructor3" to mutableMapOf<String, Any>(
-            "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,4)),
-            "estado" to mutableMapOf<String, String>("[0,4]" to "B")
-        ),
-        "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>())))
-
-
-    val actualizado = actualizarTablero(configuracionUsuario)
-    println(actualizado)
-}

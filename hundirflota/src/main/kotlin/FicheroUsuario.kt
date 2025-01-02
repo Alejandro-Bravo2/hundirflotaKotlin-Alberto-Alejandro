@@ -39,7 +39,8 @@ class FicheroUsuario(val nombreJugador: String) {
                 "coordenadas" to mutableListOf<MutableList<Int>>(mutableListOf<Int>(0,4)),
                 "estado" to mutableMapOf<String, String>("[0,4]" to "B")
             )),
-            "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>()))
+            "movimientos" to mutableListOf<Any>())
+        //Esto era lo que yo tenía antes lo pongo aqui por si acaso "movimientos" to mutableListOf<Any>(mutableMapOf<String, Any>()))
 
         val gson = Gson()
         val jsonString = gson.toJson(configuracionUsuario)

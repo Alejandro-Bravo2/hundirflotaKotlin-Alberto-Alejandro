@@ -62,13 +62,14 @@ fun atacante(tableroRealAtacante : MutableList<MutableList<String>>,diccionarioA
     Fjugador2.escribirFichero(diccionarioJugENEMIGO)
 
     var diccionarioAtacanteActualizadoOculto = actualizarTablero(diccionarioJugENEMIGO) as MutableMap<String, Any>
-    var tableroOcultoActualizado = diccionarioAtacanteActualizadoOculto["tablero"] as MutableList<String>
+    var tableroOcultoActualizado = diccionarioAtacanteActualizadoOculto["tablero"] as MutableList<MutableList<String>>
     for (fila in tableroOcultoActualizado){
         println(fila)
     }
     println("Ataque $ejex, $ejey")
     println("Resultado del ataque: $resultadoAtaque")
 
+    cambioTurno()
 }
 
 
