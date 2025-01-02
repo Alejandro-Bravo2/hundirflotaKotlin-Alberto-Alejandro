@@ -44,13 +44,13 @@ fun atacante(tableroRealAtacante : MutableList<MutableList<String>>,diccionarioA
         }
     }
     if (listaCoordenadas.size != 2){
-        println("Has introducido mal las coordenadas, ATAQUE FALLIDO")
+        println("Has introducido mal las coordenadas, ATAQUE FALLIDO, Por defecto atacará a 0,0")
         listaCoordenadas.clear()
         listaCoordenadas = mutableListOf(0,0)
     }
-    println("Turno del jugador $nombreRival")
+    println("Turno del jugador $nombreJugador")
     val ejex = listaCoordenadas[0]
-    val ejey = listaCoordenadas[0]
+    val ejey = listaCoordenadas[1]
 
     val coordenadasParaComprobacionDiccionario = "[" + ejex + "," + ejey + "]"
 
