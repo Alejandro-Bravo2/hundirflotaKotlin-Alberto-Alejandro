@@ -5,13 +5,14 @@ package org.alejandro.kotlin
 
 
 fun main(){
+    var Fjugador : FicheroUsuario = FicheroUsuario("j9000")
     val opcionMenu = menu()
     when (opcionMenu) {
         1 -> {
-            establecerConexion()
+            establecerConexion(Fjugador)
         }
         2 -> {
-            configurarBarcos()
+            Fjugador = configurarBarcos()
         }
         3 -> {
             return

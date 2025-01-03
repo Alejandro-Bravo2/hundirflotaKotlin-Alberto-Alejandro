@@ -1,6 +1,6 @@
 package org.alejandro.kotlin
 
-fun establecerConexion(){
+fun establecerConexion(FicheroUsuario : FicheroUsuario){
     val general = FicheroGeneral()
     val existencia = general.comprobarExistencia()
     if (!existencia){
