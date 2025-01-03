@@ -1,6 +1,6 @@
 package org.alejandro.kotlin
 
-fun configurarBarcos() : FicheroUsuario{
+fun configurarBarcos(){
 
     var nombreJugador : String
 
@@ -102,7 +102,7 @@ fun configurarBarcos() : FicheroUsuario{
         diccionarioConTableroOculto["barco"] = barcosDict
         ficheroJugadorConfigurando.escribirFichero(diccionarioConTableroOculto)
     }
-    return ficheroJugadorConfigurando
+    menuLuegoConf(ficheroJugadorConfigurando, nombreJugador)
 
 }
 

@@ -1,13 +1,28 @@
 package org.alejandro.kotlin
 
-fun establecerConexion(FicheroUsuario : FicheroUsuario){
+fun establecerConexion(FicheroJugadorMod : FicheroUsuario, PosibleNombreJugador : String){
+
+    var nombreJugador : String
+    var ficheroJugador : FicheroUsuario
+
     val general = FicheroGeneral()
     val existencia = general.comprobarExistencia()
     if (!existencia){
         general.crearFichero()
     }
-    val nombreJugador = general.revisarJugadores()
-    general.agregarJugadorAPartida()
+    if (PosibleNombreJugador == "None"){
+        nombreJugador = general.revisarJugadores()
+        general.agregarJugadorAPartida()
+        ficheroJugador = FicheroUsuario(nombreJugador)
+        val existenciaFicheroJugador = ficheroJugador.comprobarExistencia()
+        if (!existenciaFicheroJugador){
+            ficheroJugador.crearFichero()
+        }
+    } else{
+        nombreJugador = PosibleNombreJugador
+        ficheroJugador = FicheroJugadorMod
+    }
+
     var diccionarioGeneral = general.leerFichero()
     while (diccionarioGeneral["nombre_partida"] != "j1 vs j2"){
         println("Estas en la cola de espera...")
@@ -15,11 +30,7 @@ fun establecerConexion(FicheroUsuario : FicheroUsuario){
         diccionarioGeneral = general.leerFichero()
     }
 
-    val ficheroJugador = FicheroUsuario(nombreJugador)
-    val existenciaFicheroJugador = ficheroJugador.comprobarExistencia()
-    if (!existenciaFicheroJugador){
-        ficheroJugador.crearFichero()
-    }
+
     tiempoEspera()
     jugar(ficheroJugador, general, nombreJugador)
 

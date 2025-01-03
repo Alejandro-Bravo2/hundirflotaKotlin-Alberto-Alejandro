@@ -1,7 +1,7 @@
 package org.alejandro.kotlin
 
 
-fun menuLuegoConf(Fjugador : FicheroUsuario){
+fun menuLuegoConf(Fjugador : FicheroUsuario,nombreJugador : String){
     val rangoOpciones = Regex("[1-3]")
     limpiarPantalla()
     println("-----MENU------")
@@ -26,10 +26,10 @@ fun menuLuegoConf(Fjugador : FicheroUsuario){
 
     when (entrada) {
         1 -> {
-            establecerConexion(Fjugador)
+            establecerConexion(Fjugador, nombreJugador)
         }
         2 -> {
-            var FicheroJugador = configurarBarcos()
+            configurarBarcos()
         }
         3 -> {
             return
